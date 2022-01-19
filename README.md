@@ -29,6 +29,7 @@ Learn more about installing CiviCRM extensions in the [CiviCRM Sysadmin Guide](h
 ## Links
 
 - https://docs.civicrm.org/dev/en/latest/extensions/payment-processors/create
+- https://stackoverflow.com/questions/53912401/add-cancel-url-mollie-payment
 
 ## Known Issues
 

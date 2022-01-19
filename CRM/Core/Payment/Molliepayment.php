@@ -2,6 +2,7 @@
 
 // phpcs:disable
 use CRM_Ctrl_Molliepayment_ExtensionUtil as E;
+use Mollie\Api\MollieApiClient;
 
 // phpcs:enable
 
@@ -87,7 +88,7 @@ class CRM_Core_Payment_Molliepayment extends CRM_Core_Payment {
       CRM_Core_Error::fatal(ts('Component is invalid'));
     }
     // Mollie object.
-    $mollie = new \Mollie\Api\MollieApiClient();
+    $mollie = new MollieApiClient();
     $mollie->setApiKey($this->_paymentProcessor['user_name']);
     try {
       $payment = $mollie->payments->create([
@@ -128,7 +129,7 @@ class CRM_Core_Payment_Molliepayment extends CRM_Core_Payment {
    */
   public function handlePaymentNotification() {
     require_once 'MolliepaymentIPN.php';
-    CRM_Core_Payment_MolliepaymentIPN::main();
+    CRM_Core_Payment_MolliepaymentIPN::main($this->_paymentProcessor);
   }
 
 }
