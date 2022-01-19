@@ -3,7 +3,8 @@
     "description": "Everything functionally related to integrating Mollie payment provider in CiviCRM.",
     "type": "civicrm-extension",
     "require": {
-        "composer/installers": "~1.0"
+        "composer/installers": "~1.0",
+        "mollie/mollie-api-php": "^2.40"
     },
     "keywords": [
         "CiviCRM"

@@ -1,9 +1,7 @@
 <?php
 
 require_once 'molliepayment.civix.php';
-// phpcs:disable
-use CRM_Molliepayment_ExtensionUtil as E;
-// phpcs:enable
+use CRM_Ctrl_Molliepayment_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_config().
@@ -12,6 +10,10 @@ use CRM_Molliepayment_ExtensionUtil as E;
  */
 function molliepayment_civicrm_config(&$config) {
   _molliepayment_civix_civicrm_config($config);
+  $extRoot = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+  $include_path = $extRoot . DIRECTORY_SEPARATOR . 'vendor' . PATH_SEPARATOR . get_include_path( );
+  set_include_path( $include_path );
+  require_once 'vendor/autoload.php';
 }
 
 /**
@@ -86,6 +88,26 @@ function molliepayment_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_managed
  */
 function molliepayment_civicrm_managed(&$entities) {
+  $entities[] = [
+    'module' => 'be.ctrl.molliepayment',
+    'name' => 'CiviCRM Mollie Payment',
+    'entity' => 'PaymentProcessorType',
+    'params' => [
+      'version' => 3,
+      'name' => 'ctrl_mollie_payment',
+      'title' => 'CiviCRM Mollie Payment',
+      'description' => 'CiviCRM Mollie payment option.',
+      'class_name' => 'Payment_Molliepayment',
+      'user_name_label' => 'API key',
+      'url_site_default' => 'https://mollie.com',
+      'url_api_default' => 'https://mollie.com',
+      'url_site_test_default' => 'https://mollie.com',
+      'url_api_test_default' => 'https://mollie.com',
+      'billing_mode' => 4,
+      'is_recur' => 0,
+      'payment_type' => 1,
+    ],
+  ];
   _molliepayment_civix_civicrm_managed($entities);
 }
 

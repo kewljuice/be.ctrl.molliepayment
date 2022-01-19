@@ -1,6 +1,6 @@
 # be.ctrl.molliepayment
 
-![Screenshot](/images/screenshot.png)
+![Screenshot](./images/payment.png)
 
 Everything functionally related to integrating Mollie payment provider in CiviCRM.
 
